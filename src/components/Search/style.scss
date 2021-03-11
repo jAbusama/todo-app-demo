@@ -1,0 +1,115 @@
+.searchBox {
+  display: flex;
+  align-items: center;
+  float: right;
+
+  & .ant-input {
+    font-size: 1.8rem;
+    width: 30rem;
+    padding: 0.4rem 0.8rem;
+    background-color: #6443f0;
+    color: #fff;
+    border-radius: 0.8rem;
+
+    &:hover,
+    &:focus {
+      border-color: #6443f0;
+    }
+  }
+
+  & input:-internal-autofill-selected {
+    background-color: #6443f0;
+  }
+
+  & .ant-input-suffix span {
+    color: #fff;
+  }
+
+  & .searchButton {
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin-left: 0.8rem;
+    color: #4d4d4d;
+
+    & span {
+      &:hover {
+        color: #ec1a65;
+      }
+    }
+
+    &.active {
+      color: #ec1a65;
+    }
+  }
+}
+
+.searchInputVisible {
+  z-index: 1;
+  width: 256px;
+  display: block;
+  animation-name: moveInLeft;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-name: moveInLeft;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.searchInputHid {
+  opacity: 0;
+  visibility: hidden;
+  transition: ease-in-out 0.5s;
+  animation-name: moveInRight;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-name: moveInRight;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+@keyframes moveInLeft {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 25rem;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes moveInLeft {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 25rem;
+    opacity: 1;
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    width: 25rem;
+    opacity: 1;
+  }
+
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes moveInRight {
+  0% {
+    width: 25rem;
+    opacity: 1;
+  }
+
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}

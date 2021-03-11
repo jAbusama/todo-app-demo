@@ -1,0 +1,44 @@
+.app__header {
+  height: 20rem;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(140, 89, 246, 0.8),
+      rgba(100, 65, 243, 0.8)
+    ),
+    url('../../assets/hero.jpg');
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  padding: 2rem;
+
+  &-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+  }
+}
+
+.event {
+  margin-bottom: 1.6rem;
+  color: #fff;
+  font-weight: 400;
+  font-size: 2.5rem;
+  &__category {
+    font-weight: 500;
+  }
+  &__name {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+  &__period {
+    text-align: right;
+  }
+
+  & &__category h4,
+  & &__name h3,
+  & &__period h3 {
+    color: #fff;
+  }
+}
