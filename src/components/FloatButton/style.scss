@@ -1,114 +1,11 @@
 .float {
   position: relative;
   z-index: 99;
+  // height: 10px;
   &__button {
     position: absolute;
     top: 30%;
-    left: 80%;
-    transform: translate(-60%, -50%);
-  }
-}
-
-.btn {
-  &,
-  &:link,
-  &:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.5rem 4rem;
-    display: inline-block;
-    border-radius: 10rem;
-    transition: all 0.2s;
-    position: relative;
-    font-size: 1.6rem;
-
-    //button
-    border: none;
-    cursor: pointer;
-  }
-
-  &:hover {
-    transform: translateY(-0.3rem);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-
-    &::after {
-      transform: scaleX(1.4) scaleY(1.6);
-      opacity: 0;
-    }
-  }
-  &:active,
-  &:focus {
-    outline: none;
-    transform: translateY(-0.1rem);
-    box-shadow: 0 0.5rem 0.7rem rgba(0, 0, 0, 0.2);
-  }
-
-  &--white {
-    background-color: #fff;
-    color: #777;
-
-    &::after {
-      background-color: #fff;
-    }
-  }
-
-  &--primary {
-    background-color: #ec1a65;
-    border-color: #ec1a65;
-    color: #fff;
-    &::after {
-      background-color: #ec1a65;
-    }
-    &:hover {
-      color: #fff;
-    }
-
-    &-round {
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border-radius: 50% !important;
-      width: 5rem;
-      height: 5rem;
-      padding: 0 !important;
-      &:hover {
-        &::after {
-          transform: scaleX(1.9) scaleY(1.9);
-          opacity: 0;
-        }
-      }
-    }
-  }
-
-  &--green {
-    background-color: #55c57a;
-    color: #fff;
-
-    &::after {
-      background-color: #55c57a;
-    }
-  }
-
-  &::after {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all 0.4s;
-  }
-
-  &--animate {
-    animation: moveInBottom 0.5s ease-out 0.75s;
-    animation-fill-mode: backwards;
-  }
-
-  &--lg {
-    width: 20rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

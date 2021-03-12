@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Radio } from 'antd';
-import {
-  CalendarFilled,
-  FolderFilled,
-  SearchOutlined,
-} from '@ant-design/icons';
+import { CalendarFilled, FolderFilled } from '@ant-design/icons';
 
 function CategoryRadio() {
   const options = [

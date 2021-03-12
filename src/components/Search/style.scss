@@ -45,7 +45,7 @@
 
 .searchInputVisible {
   z-index: 1;
-  width: 256px;
+  width: 30rem;
   display: block;
   animation-name: moveInLeft;
   animation-duration: 0.5s;
@@ -73,7 +73,7 @@
   }
 
   100% {
-    width: 25rem;
+    width: 30rem;
     opacity: 1;
   }
 }
@@ -85,14 +85,14 @@
   }
 
   100% {
-    width: 25rem;
+    width: 30rem;
     opacity: 1;
   }
 }
 
 @keyframes moveInRight {
   0% {
-    width: 25rem;
+    width: 30rem;
     opacity: 1;
   }
 
@@ -104,7 +104,7 @@
 
 @-webkit-keyframes moveInRight {
   0% {
-    width: 25rem;
+    width: 30rem;
     opacity: 1;
   }
 

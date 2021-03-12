@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { debounce } from 'lodash';
 
-import { Input, Button } from 'antd';
+import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import './style.scss';
 
 const SearchButton = () => {
-  const onSearch = (e) => {
-    console.log(e);
-  };
+  const onSearch = (e) => {};
 
   const [state, setState] = useState(false);
   const [value, setValue] = useState('');

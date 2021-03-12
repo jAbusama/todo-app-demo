@@ -1,16 +1,16 @@
-import React from 'react';
-import FloatButton from '../../components/FloatButton';
+import React, { useState } from 'react';
 import Todos from '../../components/Todos';
-import AddButton from '../../components/AddButton';
+import db from '../../db.json';
 
-function index() {
+const Home = () => {
+  const [todosData, setTodosData] = useState(db.todos);
+  const [tabs, setTabs] = useState(db.tabs);
+
   return (
     <div>
-      <FloatButton />
-      <Todos />
-      <AddButton />
+      <Todos data={todosData} tabs={tabs} />
     </div>
   );
-}
+};
 
-export default index;
+export default Home;

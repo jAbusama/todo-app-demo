@@ -1,14 +1,18 @@
 import React from 'react';
-import { Button } from 'antd';
+import PropTypes from 'prop-types';
 import './style.scss';
 
-function FloatButton() {
+function FloatButton({ onClick, toggle }) {
   return (
     <div className='float'>
       <div className='float__button'>
-        <a href='' className='btn btn--primary btn--animate btn--lg'>
-          Complete All
-        </a>
+        <span
+          href=''
+          className='btn btn--primary btn--animate btn--lg'
+          onClick={onClick}
+        >
+          {toggle ? ' Uncheck All' : 'Complete All'}
+        </span>
       </div>
     </div>
   );

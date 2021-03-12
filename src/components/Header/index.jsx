@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'antd';
+import moment from 'moment';
+import { sortArray } from '../../utils/utils';
 import './style.scss';
 
 function Header() {
+  const today = moment().format('MMM Do');
+  const [todos, setTodos] = useState([]);
+  const [dueTodo, setDueTodo] = useState(todos);
+
+  useEffect(() => {
+    setTodos(
+      sortArray(JSON.parse(localStorage.getItem('todos')), 'date').filter(
+        (item) => moment(item.date).format('MMM Do') === today
+      )
+    );
+  }, []);
+
   return (
     <header className='app__header'>
       <div className='app__header-text'>

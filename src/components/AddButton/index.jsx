@@ -1,16 +1,17 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 
-function AddButton() {
+function AddButton({ handleClick }) {
   return (
     <Row justify='center' style={{ marginTop: '.8rem' }}>
       <Col>
-        <a
-          href=''
-          className='btn  btn--primary btn--primary-round btn--animate'
+        <span
+          className='btn  btn--primary btn--round btn--animate'
+          onClick={handleClick}
         >
-          <span>+</span>
-        </a>
+          <PlusOutlined style={{ fontSize: '1.6rem' }} />
+        </span>
       </Col>
     </Row>
   );

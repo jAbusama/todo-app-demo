@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tabs, List, Avatar, Checkbox, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Tabs, List, Spin, Checkbox, Button } from 'antd';
 import {
   EditOutlined,
   DeleteOutlined,
@@ -10,59 +10,82 @@ import moment from 'moment';
 
 const { TabPane } = Tabs;
 
-function GroupTab() {
-  const data = [
-    {
-      title: 'Ant Design Title 1',
-      note:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis, culpa.',
-      group: 'Work',
-      date: moment().format('MMM Do'),
-      time: moment().format('h:mm a'),
-      complete: false,
-    },
-    {
-      title: 'Ant Design Title 2',
-      note:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis, culpa.',
-      group: 'Personal',
-      date: moment().format('MMM Do'),
-      time: moment().format('h:mm a'),
-      complete: false,
-    },
-    {
-      title: 'Ant Design Title 3',
-      note:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis, culpa.',
-      group: 'Other',
-      date: moment().format('MMM Do'),
-      time: moment().format('h:mm a'),
-      complete: false,
-    },
-    {
-      title: 'Ant Design Title 4',
-      note:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis, culpa.',
-      group: 'Personal',
-      date: moment().format('MMM Do'),
-      time: moment().format('h:mm a'),
-      complete: false,
-    },
-  ];
+const GroupTab = (props) => {
+  const { data, tabs, onChangeData, isLoading } = props;
 
-  const EditButton = () => {
-    return <Button type='link' icon={<EditOutlined />} />;
+  const [todosList, setTodosList] = useState(data);
+  const [currentTab, setCurrentTab] = useState('1');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setTodosList(data);
+  }, [data]);
+
+  useEffect(() => {
+    filteringTodo();
+  }, [data, currentTab]);
+
+  const filteringTodo = () => {
+    const today = moment().format('MMM Do');
+    const tomorrow = moment().add(1, 'day').format('MMM Do');
+    let list = [];
+    if (currentTab === '1') {
+      list = data.filter(
+        (item) => moment(item.date).format('MMM Do') === today
+      );
+    } else if (currentTab === '2') {
+      list = data.filter(
+        (item) => moment(item.date).format('MMM Do') === tomorrow
+      );
+    } else {
+      list = data.filter(
+        (item) =>
+          moment(item.date).format('MMM Do') !== today &&
+          moment(item.date).format('MMM Do') !== tomorrow
+      );
+    }
+    setTodosList(list);
   };
 
-  const DeleteButton = () => {
-    return <Button type='link' icon={<DeleteOutlined />} size='large' />;
+  const EditButton = ({ onClickHandler, id }) => {
+    return (
+      <Button
+        type='link'
+        icon={<EditOutlined />}
+        onClick={() => onClickHandler(id)}
+      />
+    );
   };
 
-  const tabs = [
-    { title: 'Today', key: 1 },
-    { title: 'Tomorrow', key: 2 },
-    { title: 'Upcomming', key: 3 },
-  ];
+  const DeleteButton = ({ onClickHandler, id }) => {
+    return (
+      <Button
+        type='link'
+        icon={<DeleteOutlined />}
+        onClick={() => onClickHandler(id)}
+      />
+    );
+  };
+
+  const onChangeHandler = (e, id) => {
+    onChangeData('check', id, e.target.checked);
+  };
+
+  const onDeleteHanlder = (id) => {
+    onChangeData('delete', id);
+  };
+
+  const onEditHanlder = (id) => {
+    onChangeData('edit', id);
+  };
+
+  const onChangeTab = (key) => {
+    setLoading(true);
+    setTimeout(() => {
+      setCurrentTab(key);
+      setLoading(false);
+    }, 500);
+  };
 
   const TaskDescription = ({ data }) => {
     return (
@@ -73,11 +96,11 @@ function GroupTab() {
         <div className='task__period'>
           <span className='task__period-date'>
             <CalendarOutlined />
-            {data.date}
+            {moment(data.date).format('MMM Do')}
           </span>
           <span className='task__period-time'>
             <FieldTimeOutlined />
-            {data.time}
+            {moment(data.time).format('h:mm a')}
           </span>
         </div>
         <div className='task__note'>
@@ -88,32 +111,43 @@ function GroupTab() {
   };
 
   const TabsContent = () => (
-    <List
-      itemLayout='horizontal'
-      dataSource={data}
-      renderItem={(item) => (
-        <List.Item actions={[<EditButton />, <DeleteButton />, <Checkbox />]}>
-          <List.Item.Meta
-            avatar={
-              <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
-            }
-            title={item.title}
-            description={<TaskDescription data={item} />}
-          />
-        </List.Item>
-      )}
-    />
+    <Spin tip='Loading...' spinning={isLoading || loading}>
+      <List
+        itemLayout='horizontal'
+        dataSource={todosList}
+        renderItem={(todo) => (
+          <List.Item
+            actions={[
+              <EditButton onClickHandler={onEditHanlder} id={todo.id} />,
+              <DeleteButton onClickHandler={onDeleteHanlder} id={todo.id} />,
+              <Checkbox
+                checked={todo.complete}
+                onChange={(e) => onChangeHandler(e, todo.id)}
+              />,
+            ]}
+          >
+            <List.Item.Meta
+              className={`${todo.complete && 'todo-complete'}`}
+              title={todo.title}
+              description={<TaskDescription data={todo} />}
+            />
+          </List.Item>
+        )}
+      />
+    </Spin>
   );
 
   return (
-    <Tabs defaultActiveKey='1'>
-      {tabs.map((item) => (
-        <TabPane tab={<span>{item.title}</span>} key={item.key}>
-          <TabsContent />
-        </TabPane>
-      ))}
-    </Tabs>
+    <>
+      <Tabs defaultActiveKey='1' onChange={onChangeTab}>
+        {tabs.map((item) => (
+          <TabPane tab={<span>{item.title}</span>} key={item.id}>
+            <TabsContent />
+          </TabPane>
+        ))}
+      </Tabs>
+    </>
   );
-}
+};
 
 export default GroupTab;
