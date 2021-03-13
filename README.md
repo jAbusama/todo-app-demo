@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Instruction
 
-1. clone the project [here][https://github.com/jabusama/todo-app-demo.git]
+1. clone the project [here](https://github.com/jabusama/todo-app-demo.git)
 2. npm install
 3. npm start
 
