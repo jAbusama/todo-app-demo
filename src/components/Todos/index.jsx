@@ -5,11 +5,11 @@ import { Row, Col, Divider } from 'antd';
 import CustomModal from '../CustomModal';
 import AddButton from '../AddButton';
 import FloatButton from '../../components/FloatButton';
-import { sortArray } from '../../utils/utils';
+
 const initData = { title: '', note: '', date: '', time: '' };
 
 const Todos = (props) => {
-  const { data, tabs } = props;
+  const { data, tabs, incommingTodo } = props;
 
   const [todos, setTodos] = useState(data);
   const [selectedTodo, setSelectedTodo] = useState(initData);
@@ -20,7 +20,7 @@ const Todos = (props) => {
   useEffect(() => {
     setTodos(
       JSON.parse(localStorage.getItem('todos')).sort(function (a, b) {
-        return a.time.localeCompare(b.time);
+        return a.date.localeCompare(b.date);
       })
     );
   }, [data]);
@@ -29,6 +29,7 @@ const Todos = (props) => {
     const orderedList = todos.sort(function (a, b) {
       return a.date.localeCompare(b.date);
     });
+
     localStorage.setItem('todos', JSON.stringify(orderedList));
   }, [todos]);
 
@@ -136,6 +137,7 @@ const Todos = (props) => {
                 data={todos}
                 onChangeData={onChangeHandler}
                 isLoading={loading}
+                getIncommingTodo={incommingTodo}
               />
               <Divider />
             </Col>

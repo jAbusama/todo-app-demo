@@ -16,24 +16,24 @@ const Form = (props) => {
     setFormData(formValues);
   }, [formValues]);
 
-  const initValidate = {
-    title: {
-      value: '',
-      touch: false,
-    },
-    note: {
-      value: '',
-      touch: false,
-    },
-    date: {
-      value: '',
-      touch: false,
-    },
-    time: {
-      value: '',
-      touch: false,
-    },
-  };
+  //   const initValidate = {
+  //     title: {
+  //       value: '',
+  //       touch: false,
+  //     },
+  //     note: {
+  //       value: '',
+  //       touch: false,
+  //     },
+  //     date: {
+  //       value: '',
+  //       touch: false,
+  //     },
+  //     time: {
+  //       value: '',
+  //       touch: false,
+  //     },
+  //   };
 
   const inputType = {
     Todo: [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import SearchInput from '../Search';
+// import SearchInput from '../Search';
 import './style.scss';
 
 function Header() {
@@ -14,7 +14,7 @@ function Header() {
             </div>
           </Col> */}
           <Col xs={24} md={20} lg={16}>
-            <SearchInput />
+            {/* <SearchInput /> */}
           </Col>
         </Row>
       </div>

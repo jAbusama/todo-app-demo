@@ -11,7 +11,7 @@ import moment from 'moment';
 const { TabPane } = Tabs;
 
 const GroupTab = (props) => {
-  const { data, tabs, onChangeData, isLoading } = props;
+  const { data, tabs, onChangeData, isLoading, getIncommingTodo } = props;
 
   const [todosList, setTodosList] = useState(data);
   const [currentTab, setCurrentTab] = useState('1');
@@ -30,19 +30,32 @@ const GroupTab = (props) => {
     const tomorrow = moment().add(1, 'day').format('MMM Do');
     let list = [];
     if (currentTab === '1') {
-      list = data.filter(
-        (item) => moment(item.date).format('MMM Do') === today
-      );
+      list = data
+        .filter((item) => moment(item.date).format('MMM Do') === today)
+        .sort(function (a, b) {
+          return a.time.localeCompare(b.time);
+        });
+      if (list.length !== 0) {
+        getIncommingTodo(list[0]);
+      } else {
+        getIncommingTodo({});
+      }
     } else if (currentTab === '2') {
-      list = data.filter(
-        (item) => moment(item.date).format('MMM Do') === tomorrow
-      );
+      list = data
+        .filter((item) => moment(item.date).format('MMM Do') === tomorrow)
+        .sort(function (a, b) {
+          return a.time.localeCompare(b.time);
+        });
+    } else if (currentTab === '3') {
+      list = data
+        .filter((item) => moment(item.date).isAfter(moment().add(1, 'day')))
+        .sort(function (a, b) {
+          return a.date.localeCompare(b.date);
+        });
     } else {
-      list = data.filter(
-        (item) =>
-          moment(item.date).format('MMM Do') !== today &&
-          moment(item.date).format('MMM Do') !== tomorrow
-      );
+      list = data.sort(function (a, b) {
+        return a.date.localeCompare(b.date);
+      });
     }
     setTodosList(list);
   };
