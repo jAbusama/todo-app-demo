@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+# Front End Coding Test
+
+# Instruction
+
+1. clone the project [here][https://github.com/jabusama/todo-app-demo.git]
+2. npm install
+3. npm start
+
 In the project directory, you can run:
 
 ### `npm start`
